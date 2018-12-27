@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {Button} from 'evergreen-ui';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from './redux/actions';
+//import * as actions from './redux/actions';
+import {fetchGistList} from './redux/actions';
 import List from './List';
 import GlobalHeader from '../common/GlobalHeader';
 
@@ -17,31 +19,22 @@ export class DefaultPage extends Component {
     const { fetchGistListPending, gistList, fetchGistListError } = this.props.gists;
     const { fetchGistList } = this.props.actions;
 
-    console.log(this.props, fetchGistList);
+    console.log(this.props, this.props.gists);
 
     return (
       <div className="gists-default-page">
         <GlobalHeader/>
-        <List/>
-        <h1>Gist API Usage</h1>
+        <h1>Gists API Usage</h1>
         <p>This demo shows how to use Redux async actions to fetch data from Gist's REST API.</p>
-        <button className="btn-fetch-reddit" disabled={fetchGistListPending} onClick={fetchGistList}>
-          {fetchGistListPending ? 'Fetching...' : 'Fetch reactjs topics'}
-        </button>
+        <Button className="btn-fetch-reddit" disabled={fetchGistListPending} onClick={fetchGistList}>
+          {fetchGistListPending ? 'Fetching...' : 'Fetch gists'}
+        </Button>
         {fetchGistListError && (
           <div className="fetch-list-error">Failed to load: {fetchGistListError.toString()}</div>
         )}
-        {gistList && gistList.length > 0 ? (
-          <ul className="examples-reddit-list">
-            {gistList.map(item => (
-              <li key={item.data.id}>
-                <a href={item.data.url}>{item.data.title}</a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div className="no-items-tip">No items yet.</div>
-        )}
+
+        <List items={gistList}/>
+        
       </div>
     );
   }
@@ -57,7 +50,7 @@ function mapStateToProps(state) {
 /* istanbul ignore next */
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ ...actions }, dispatch)
+    actions: bindActionCreators({ fetchGistList }, dispatch)
   };
 }
 

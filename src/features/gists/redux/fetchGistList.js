@@ -1,4 +1,6 @@
-import { getGists } from '../../../services/index';
+import {
+  getGists
+} from '../../../services/index';
 import {
   GISTS_FETCH_GIST_LIST_BEGIN,
   GISTS_FETCH_GIST_LIST_SUCCESS,
@@ -36,7 +38,9 @@ export function fetchGistList(args = {}) {
         (err) => {
           dispatch({
             type: GISTS_FETCH_GIST_LIST_FAILURE,
-            data: { error: err },
+            data: {
+              error: err
+            },
           });
           reject(err);
         },
@@ -56,6 +60,7 @@ export function dismissFetchGistListError() {
 }
 
 export function reducer(state, action) {
+  console.log('reducer', action, state);
   switch (action.type) {
     case GISTS_FETCH_GIST_LIST_BEGIN:
       // Just after a request is sent
@@ -69,6 +74,8 @@ export function reducer(state, action) {
       // The request is success
       return {
         ...state,
+        // TODO - this is where you add the data to the state
+        gistList: action.data.data,
         fetchGistListPending: false,
         fetchGistListError: null,
       };

@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const cache = new Map();
 
 /**
@@ -8,12 +10,13 @@ export function getGists(username = 'jonniespratley') {
   if (cache.has(username)) {
     return Promise.resolve(cache.get(username));
   }
-  
-  return fetch(`https://api.github.com/users/${username}/gists`)
-    .then(resp => (resp.json().then(json => {
-      cache.set(username, json);
-      return json;
-    })));
+
+  return axios.get(`https://api.github.com/users/${username}/gists`)
+    .then(resp => {
+      console.log('getGists', resp);
+      cache.set(username, resp);
+      return resp;
+    });
 }
 
 /**
@@ -24,10 +27,10 @@ export function getGist(id) {
   if (cache.has(id)) {
     return Promise.resolve(cache.get(id));
   }
-  
-  return fetch(`https://api.github.com/gists/${id}`)
-  .then(resp => (resp.json().then(json => {
-    cache.set(id, json);
-    return json;
-  })));
+
+  return axios.get(`https://api.github.com/gists/${id}`)
+    .then(resp => {
+      cache.set(id, resp);
+      return resp;
+    });
 }

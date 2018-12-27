@@ -10,6 +10,8 @@ const initialState = {
   searchError: null,
   fetchGistListPending: false,
   fetchGistListError: null,
+  count: 0,
+  gistList: []
 };
 
 export default initialState;
