@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-//import { Link } from 'react-router-dom';
-import { Button } from 'evergreen-ui'
-
+import { Link } from 'react-router-dom';
 import GlobalHeader from '../common/GlobalHeader';
-
 import reactLogo from '../../images/react-logo.svg';
 import rekitLogo from '../../images/rekit-logo.svg';
 import * as actions from './redux/actions';
@@ -28,7 +24,7 @@ export class DefaultPage extends Component {
           <h1 className="app-title">Welcome to React</h1>
         </header>
         <div className="app-intro">
-          
+          <Link to="/gists">Gists</Link>
         
         </div>
       </div>
