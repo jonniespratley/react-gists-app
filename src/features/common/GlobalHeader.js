@@ -8,14 +8,14 @@ export default class GlobalHeader extends Component {
   };
 
   static defaultProps = {
-    title: 'React Gists'
+    title: 'Rekit App'
   };
 
   render() {
     const { title } = this.props;
     return (
       <div className="common-global-header">
-        <Pane display="flex" padding={5} background="tint2" borderRadius={0}>
+        <Pane display="flex" padding={8} background="tint2" borderRadius={0}>
           <Pane flex={1} alignItems="center" display="flex">
             <Heading size={600}>{ title }</Heading>
           </Pane>

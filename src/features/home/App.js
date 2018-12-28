@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GlobalHeader from '../common/GlobalHeader';
 import PropTypes from 'prop-types';
 
 /*
@@ -18,6 +19,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="home-app">
+      <GlobalHeader/>
         <div className="page-container">{this.props.children}</div>
       </div>
     );

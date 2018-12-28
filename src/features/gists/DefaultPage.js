@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Button} from 'evergreen-ui';
+import { Button } from 'evergreen-ui';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-//import * as actions from './redux/actions';
-import {fetchGistList} from './redux/actions';
+
+import { fetchGistList } from './redux/actions';
 import List from './List';
-import GlobalHeader from '../common/GlobalHeader';
+
 
 export class DefaultPage extends Component {
   static propTypes = {
@@ -14,27 +14,21 @@ export class DefaultPage extends Component {
     actions: PropTypes.object.isRequired,
   };
 
-  render() {
-    
+  render() {    
     const { fetchGistListPending, gistList, fetchGistListError } = this.props.gists;
     const { fetchGistList } = this.props.actions;
-
-    console.log(this.props, this.props.gists);
-
     return (
       <div className="gists-default-page">
-        <GlobalHeader/>
         <h1>Gists API Usage</h1>
         <p>This demo shows how to use Redux async actions to fetch data from Gist's REST API.</p>
         <Button className="btn-fetch-reddit" disabled={fetchGistListPending} onClick={fetchGistList}>
           {fetchGistListPending ? 'Fetching...' : 'Fetch gists'}
         </Button>
+        
         {fetchGistListError && (
           <div className="fetch-list-error">Failed to load: {fetchGistListError.toString()}</div>
         )}
-
         <List items={gistList}/>
-        
       </div>
     );
   }

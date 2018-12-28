@@ -1,20 +1,35 @@
 import axios from 'axios';
 
+export function memoize(fn){
+  const cache = new Map();
+  const cached = function(val) {
+    return cache.has(val) ? cache.get(val) : cache.set(val, fn.call(this, val)) && cache.get(val);
+  };
+  cached.cache = cache;
+  return cached;
+};
+
 const cache = new Map();
 
 /**
  * I fetch gists from github.
  * @param {String} username Github username
  */
-export function getGists(username = 'jonniespratley') {
-  if (cache.has(username)) {
-    return Promise.resolve(cache.get(username));
+export function getGists(username) {
+  let url = 'https://api.github.com/gists';
+  
+  if (username) {
+    url = `https://api.github.com/users/${username}/gists`
   }
 
-  return axios.get(`https://api.github.com/users/${username}/gists`)
+  if (cache.has(url)) {
+    return Promise.resolve(cache.get(url));
+  }
+
+  return axios.get(url)
     .then(resp => {
       console.log('getGists', resp);
-      cache.set(username, resp);
+      cache.set(url, resp);
       return resp;
     });
 }
@@ -24,13 +39,15 @@ export function getGists(username = 'jonniespratley') {
  * @param {String} id Gist ID
  */
 export function getGist(id) {
-  if (cache.has(id)) {
-    return Promise.resolve(cache.get(id));
+  let url = `https://api.github.com/gists/${id}`;
+  
+  if (cache.has(url)) {
+    return Promise.resolve(cache.get(url));
   }
 
-  return axios.get(`https://api.github.com/gists/${id}`)
+  return axios.get(url)
     .then(resp => {
-      cache.set(id, resp);
+      cache.set(url, resp);
       return resp;
     });
 }
