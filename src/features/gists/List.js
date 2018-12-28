@@ -3,10 +3,11 @@ import { Pane, Heading, Avatar, Text } from 'evergreen-ui';
 
 const GistItem = ({gist}) => (
   <Pane display="flex" padding={10} alignItems="center">
-    <Avatar src={gist.owner.avatar_url} name={gist.owner.login} size={40} />
+    <Avatar src={gist.owner.avatar_url} name={gist.owner.login} size={40} marginRight={10}/>
     <Pane flex={1}>
-      <Heading size={400}>{gist.owner.login}</Heading>
-      <Text size={300}>{gist.description}</Text>
+      <Heading size={400}>{gist.description}</Heading>
+      <Text size={300}>{gist.updated_at}</Text>
+      
     </Pane>
     <Pane display="flex">    
       <Heading>Stars</Heading>

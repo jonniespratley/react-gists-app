@@ -15,7 +15,7 @@ export default class GlobalHeader extends Component {
     const { title } = this.props;
     return (
       <div className="common-global-header">
-        <Pane display="flex" padding={10} background="tint2" borderRadius={0}>
+        <Pane display="flex" padding={5} background="tint2" borderRadius={0}>
           <Pane flex={1} alignItems="center" display="flex">
             <Heading size={600}>{ title }</Heading>
           </Pane>
