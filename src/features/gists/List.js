@@ -1,4 +1,18 @@
 import React, { Component } from 'react';
+import { Pane, Heading, Avatar, Text } from 'evergreen-ui';
+
+const GistItem = ({gist}) => (
+  <Pane display="flex" padding={10} alignItems="center">
+    <Avatar src={gist.owner.avatar_url} name={gist.owner.login} size={40} />
+    <Pane flex={1}>
+      <Heading size={400}>{gist.owner.login}</Heading>
+      <Text size={300}>{gist.description}</Text>
+    </Pane>
+    <Pane display="flex">    
+      <Heading>Stars</Heading>
+    </Pane>
+  </Pane>
+);
 
 export default class List extends Component {
   static propTypes = {
@@ -13,23 +27,11 @@ export default class List extends Component {
     return (
       <div className="gists-list">
         {items.length > 0 ? (
-          <ul className="examples-reddit-list">
-            {items.map(item => (
-              <li key={item.id}>
-
-
-              <img src={item.owner.avatar_url} alt={item.owner.login}/>
-              <span>{item.owner.login}</span>
-
-
-
-
-                <a href={item.url}>
-                  {item.description}
-                </a>
-              </li>
+          <div>
+          {items.map(item => (
+            <GistItem gist={item} key={item.id} />
             ))}
-          </ul>
+          </div>
         ) : (
           <div className="no-items-tip">No items yet.</div>
         )}
