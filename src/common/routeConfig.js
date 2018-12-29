@@ -5,6 +5,7 @@ import commonRoute from '../features/common/route';
 import _ from 'lodash';
 import gistsRoute from '../features/gists/route';
 import moviesRoute from '../features/movies/route';
+import blogRoute from '../features/blog/route';
 
 // NOTE: DO NOT CHANGE the 'childRoutes' name and the declaration pattern.
 // This is used for Rekit cmds to register routes config for new features, and remove config when remove features, etc.
@@ -13,6 +14,7 @@ const childRoutes = [
   commonRoute,
   gistsRoute,
   moviesRoute,
+  blogRoute,
 ];
 
 const routes = [{

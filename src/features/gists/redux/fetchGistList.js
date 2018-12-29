@@ -60,7 +60,6 @@ export function dismissFetchGistListError() {
 }
 
 export function reducer(state, action) {
-  console.log('reducer', action, state);
   switch (action.type) {
     case GISTS_FETCH_GIST_LIST_BEGIN:
       // Just after a request is sent
